@@ -5,7 +5,11 @@
 /tmp
 
 # dependencies
-/node_modules
+node_modules/
+
+/public
+
+oj-client/dist/
 
 # IDEs and editors
 /.idea

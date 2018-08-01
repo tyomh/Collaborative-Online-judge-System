@@ -22,7 +22,7 @@ export class AuthService {
     responseType: 'token id_token',
     audience: 'https://cojproject.auth0.com/userinfo',
     redirectUri: 'http://localhost:3000/callback',
-    scope: 'openid'
+    scope: 'openid profile'
   });
 
 
@@ -33,7 +33,7 @@ export class AuthService {
   public login(): void {
     // this.auth0.authorize();
     this.auth0.authorize();
-    //console.log(localStorage.getItem('profile'));
+    console.log(this.userProfile);
 
   }
 
@@ -93,12 +93,13 @@ export class AuthService {
 
   // public resetPassword(): void {
   //   let profile = this.getProfile();
-  //   let url: string = `https://${this.domain}/dbconnections/change_password`;
+  //   let url: string = `https://cojproject.auth0.com/dbconnections/change_password`;
   //   let headers = new Headers({ 'content-type': 'application/json' });
   //   let body = {
-  //     client_iD: this.clientID,
+  //     client_id: this.clientId,
   //     email: profile.email,
-  //     connection: 'Username-Password-Authentication'
+  //     connection: 'Username-Password-Authentication',
+  //     json: true
   //   }
   //
   //   this.http.post(url, body, headers)

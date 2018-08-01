@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
   constructor(@Inject("auth") private auth) { }
 
   ngOnInit() {
-    console.log(this.auth.userProfile);
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
     } else {

@@ -1,7 +1,9 @@
 <section>
   <header class="editor-header">
+    <div class="row">
+      <div class="form-inline">
     <select class="form-control pull-left lang-select" name="language"
-     [(ngModel)]="language" (change)="setLanguage(language)">
+     [(ngModel)]="language" (change)="setLanguage(language)" style="width: auto;">
      <option *ngFor="let language of languages" [value]="language">
        {{language}}
      </option>
@@ -11,6 +13,9 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
       Reset
     </button>
+  </div>
+</div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -34,13 +39,15 @@
       </div>
     </div>
   </header>
-  <div class="row">
+
+
+
     <div id="editor">
     </div>
-  </div><!-- This is the body -->
-  <div class="row">
-    {{output}}
-  </div>
+
+
+
+
   <footer class="editor-footer">
       <button type="button" class="btn btn-success pull-right"
       (click)="submit()">Submit Solution</button>

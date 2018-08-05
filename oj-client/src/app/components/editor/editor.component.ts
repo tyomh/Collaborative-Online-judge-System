@@ -32,7 +32,6 @@ export class EditorComponent implements OnInit {
       .subscribe(params=>{
         this.sessionId=params['id'];
         this.initEditor();
-        this.collaboration.restoreBuffer();
       })
     // this.editor = ace.edit("editor");
     // this.editor.setTheme("ace/theme/eclipse");
@@ -63,6 +62,14 @@ export class EditorComponent implements OnInit {
           this.collaboration.change(JSON.stringify(e));
       }
     });
+
+    this.editor.getSession().getSelection().on("changeCursor",() => {
+      let cursor = this.editor.getSession().getSelection().getCursor();
+      console.log("cursor move: " + JSON.stringify(cursor));
+      this.collaboration.cursorMove(JSON.stringify(cursor));
+    });
+
+    this.collaboration.restoreBuffer();
 
   }
 

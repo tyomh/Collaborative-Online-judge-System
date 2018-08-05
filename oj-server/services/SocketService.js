@@ -40,22 +40,36 @@ module.exports = function(io) {
 
         socket.on('change', delta => {
             console.log('change' + socketIdToSessionId[socket.id] + ' ' + delta );
-            const sessionId = socketIdToSessionId[socket.id];
-            if (sessionId in collaborations) {
-                const participants = collaborations[sessionId]['participants'];
-                for(let participant of participants) {
-                    if (socket.id != participant) {
-                        io.to(participant).emit('change', delta);
-                    }
-                }
-            } else {
-                console.warn('WARNING');
-            }
+            forwardEvents(socket.id, 'change', delta);
             // const sessionId = socketIdToSessionId[socket.id];
             // if (sessionId in collaborations) {
             //     collaborations[sessionId]['cachedInstructions'].push(['change', delta, Date.now()]);
             // }
             // forwardEvent(socket.id, 'change', delta);
         });
+
+        // cursor move
+
+        socket.on('cursorMove', cursor => {
+            console.log('cursorMove' + socketIdToSessionId[socket.id] + ' ' + cursor );
+            cursor = JSON.parse(cursor);
+            cursor['socketId'] = socket.id;
+            forwardEvents(socket.id, 'cursorMove', JSON.stringify(cursor));
+        });
+
+        function forwardEvents (socketId, eventName, dataString) {
+        const sessionId = socketIdToSessionId[socketId];
+        if (sessionId in collaborations) {
+            const participants = collaborations[sessionId]['participants'];
+            for(let participant of participants) {
+                if (socketId != participant) {
+                    io.to(participant).emit(eventName, dataString);
+                }
+            }
+        } else {
+            console.warn('WARNING');
+        }
+    }
       });
+
 }

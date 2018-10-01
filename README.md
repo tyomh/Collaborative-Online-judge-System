@@ -9,13 +9,20 @@ This is a full-stack project with an Angular based front end, NodeJS based restf
 • Built a user-code executor service which can build and execute user’s code (Docker, Flask);
 
 • Refactored and Improved system throughput by decoupling services using RESTful API and loading balancing by Nginx (REST API, Nginx). 
-
-## Project Architecture
-<img src="/assets/project-architecture.png" width="500">
-
 ## Screenshots 
 #### Problemlist
 ![image1](/assets/ProblemList.png)
 #### Edit
 ![image2](/assets/Edit.png)
+
+## Project Architecture
+<img src="/assets/project-architecture.png" width="500">  
+
+## Diagram for oj-client and oj-server  
+![image2](/assets/diagram.png)  
+
+## Socket IO communications  
+![image2](/assets/socketio.png)
+
+
 
